@@ -33,4 +33,7 @@ public class MemberRepository {
                 .setParameter("name",name) // name으로 바인딩이 된다.
                 .getResultList();
     }
+
+    //==비즈니스 로직==//
+
 }
