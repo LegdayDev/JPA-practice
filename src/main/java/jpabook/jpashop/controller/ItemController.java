@@ -67,9 +67,12 @@ public class ItemController {
     }
 
     @PostMapping("/items/{itemId}/edit")
-    public String updateItem(@ModelAttribute("form") BookForm form){
+    public String updateItem(@PathVariable Long itemId ,@ModelAttribute("form") BookForm form){
 
+        /**
+         * 컨트롤러에서 어설프게 엔티티를 생성하는 방법은 좋은 방법이 아니다.
         Book book = new Book();
+
         book.setId(form.getId());
         book.setName(form.getName());
         book.setPrice(form.getPrice());
@@ -78,6 +81,9 @@ public class ItemController {
         book.setIsbn(form.getIsbn());
 
         itemService.saveItem(book);
+         */
+        itemService.updateItem(itemId, form.getName(), form.getPrice(), form.getStockQuantity());
+
         return "redirect:/items";
     }
 
