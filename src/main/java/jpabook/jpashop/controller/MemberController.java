@@ -1,6 +1,6 @@
 package jpabook.jpashop.controller;
 
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 import jpabook.jpashop.domain.Address;
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.service.MemberService;
