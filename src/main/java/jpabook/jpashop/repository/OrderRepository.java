@@ -4,6 +4,7 @@ package jpabook.jpashop.repository;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
+
 import jpabook.jpashop.domain.Order;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -109,5 +110,14 @@ public class OrderRepository {
 
 
     }
+
+    public List<Order> findAllWithMemberDelivery() {
+        return em.createQuery(
+                "SELECT o FROM Order o" +
+                        " JOIN FETCH o.member m" +
+                        " JOIN FETCH o.delivery d", Order.class
+        ).getResultList();
+    }
+
 
 }
