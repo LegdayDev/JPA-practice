@@ -113,6 +113,24 @@ public class OrderApiController {
         return orderQueryRepository.findByOrderQueryDtos();
     }
 
+
+    /**
+     * <h2>V5 : DTO로 직접 조회 - 컬렉션 조회 최적화</h2>
+     * <li>V4에서는 N+1 문제가 있었다. 이를 해결하기 위해 JPQL에서 IN 키워드를 사용하면 된다.</li>
+     * <p>
+     *     루트 쿼리 1번은 무조건 보내고 orderItem은 쿼리를 전송하지 않고 루트 쿼리에서 나온 데이터값을 stream()을 이용해
+     *     id값만 가지는 List형태로 빼온다.
+     *     그리고 그 id값의 List를 JPQL in키워드로 쿼리1개로해서 가져오면 된다.
+     * </p>
+     * @return
+     */
+    @GetMapping("/api/v5/orders")
+    public List<OrderQueryDto> ordersV5(){
+        return orderQueryRepository.findAllByDto_optimization();
+    }
+
+
+
     @Data
     static class OrderDto{
 
